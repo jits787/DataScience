@@ -1,0 +1,387 @@
+C:\Users\jitendra>cd H:\xampp\mysql\bin
+
+C:\Users\jitendra>h:
+
+H:\xampp\mysql\bin>mysql -u root
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 8
+Server version: 10.4.32-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> create database college
+    -> ;
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [(none)]> show databases
+    -> ;
++--------------------+
+| Database           |
++--------------------+
+| college            |
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| test               |
++--------------------+
+6 rows in set (0.001 sec)
+
+MariaDB [(none)]> use college
+MariaDB [college]> create table student (roll int, name varchar(50),class varchar (2),marks float,age int);
+Query OK, 0 rows affected (0.281 sec)
+
+MariaDB [college]> show tables;
++-------------------+
+| Tables_in_college |
++-------------------+
+| student           |
++-------------------+
+1 row in set (0.001 sec)
+
+MariaDB [college]> insert into student values (1, 'Arnav', 'FY', 56.67, 18);
+Query OK, 1 row affected (0.061 sec)
+
+MariaDB [college]> insert into student values (2, 'Sunita', 'SY', 56.67, 19);
+Query OK, 1 row affected (0.033 sec)
+
+MariaDB [college]> insert into student values (3, 'Aditya', 'SY', 56.67, 19);
+Query OK, 1 row affected (0.033 sec)
+
+MariaDB [college]> insert into student values (3, 'Yash', 'FY', 56.67, 18);
+Query OK, 1 row affected (0.033 sec)
+
+MariaDB [college]> insert into student values (4, 'Ram', 'TY', 56.67, 20);
+Query OK, 1 row affected (0.059 sec)
+
+MariaDB [college]>
+MariaDB [college]> insert into student values (5, 'Nitesh', 'TY', 87.67, 20);
+Query OK, 1 row affected (0.041 sec)
+
+MariaDB [college]> delete from student where roll = 4;
+Query OK, 1 row affected (0.034 sec)
+
+MariaDB [college]> update student set marks=66.33 where roll=3;
+Query OK, 2 rows affected (0.045 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+MariaDB [college]> update student set marks = marks + 0.5;
+Query OK, 5 rows affected (0.048 sec)
+Rows matched: 5  Changed: 5  Warnings: 0
+
+MariaDB [college]> truncate student;
+Query OK, 0 rows affected (0.304 sec)
+
+MariaDB [college]> select * from student;
+Empty set (0.000 sec)
+
+MariaDB [college]> insert into student values (5, 'Nitesh', 'TY', 87.67, 20);
+Query OK, 1 row affected (0.040 sec)
+
+MariaDB [college]> insert into student values (1, 'Arnav', 'FY', 687.67, 18);
+Query OK, 1 row affected (0.033 sec)
+
+MariaDB [college]> insert into student values (21, 'Ankita', 'SY', 67.67, 19);
+Query OK, 1 row affected (0.041 sec)
+
+MariaDB [college]> select * from student;
++------+--------+-------+--------+------+
+| roll | name   | class | marks  | age  |
++------+--------+-------+--------+------+
+|    5 | Nitesh | TY    |  87.67 |   20 |
+|    1 | Arnav  | FY    | 687.67 |   18 |
+|   21 | Ankita | SY    |  67.67 |   19 |
++------+--------+-------+--------+------+
+3 rows in set (0.000 sec)
+
+MariaDB [college]> select sum(marks) from student;
++-------------------+
+| sum(marks)        |
++-------------------+
+| 843.0099792480469 |
++-------------------+
+1 row in set (0.000 sec)
+
+MariaDB [college]> select avg(marks) from student;
++-------------------+
+| avg(marks)        |
++-------------------+
+| 281.0033264160156 |
++-------------------+
+1 row in set (0.000 sec)
+
+MariaDB [college]> select count(roll) from student;
++-------------+
+| count(roll) |
++-------------+
+|           3 |
++-------------+
+1 row in set (0.000 sec)
+
+MariaDB [college]> select max(marks) from student;
++------------+
+| max(marks) |
++------------+
+|     687.67 |
++------------+
+1 row in set (0.000 sec)
+
+MariaDB [college]> select min(marks) from student;
++------------+
+| min(marks) |
++------------+
+|      67.67 |
++------------+
+1 row in set (0.000 sec)
+
+MariaDB [college]> select roll, name, marks from student having marks > 50;
++------+--------+--------+
+| roll | name   | marks  |
++------+--------+--------+
+|    5 | Nitesh |  87.67 |
+|    1 | Arnav  | 687.67 |
+|   21 | Ankita |  67.67 |
++------+--------+--------+
+3 rows in set (0.000 sec)
+
+MariaDB [college]> select class , count(roll) from student group by class;
++-------+-------------+
+| class | count(roll) |
++-------+-------------+
+| FY    |           1 |
+| SY    |           1 |
+| TY    |           1 |
++-------+-------------+
+3 rows in set (0.000 sec)
+
+MariaDB [college]> select * from student where name like 'A%';
++------+--------+-------+--------+------+
+| roll | name   | class | marks  | age  |
++------+--------+-------+--------+------+
+|    1 | Arnav  | FY    | 687.67 |   18 |
+|   21 | Ankita | SY    |  67.67 |   19 |
++------+--------+-------+--------+------+
+2 rows in set (0.000 sec)
+
+MariaDB [college]> select distinct(class) from student;
++-------+
+| class |
++-------+
+| TY    |
+| FY    |
+| SY    |
++-------+
+3 rows in set (0.000 sec)
+
+MariaDB [college]> select * from student  order by marks;
++------+--------+-------+--------+------+
+| roll | name   | class | marks  | age  |
++------+--------+-------+--------+------+
+|   21 | Ankita | SY    |  67.67 |   19 |
+|    5 | Nitesh | TY    |  87.67 |   20 |
+|    1 | Arnav  | FY    | 687.67 |   18 |
++------+--------+-------+--------+------+
+
+MariaDB [college]> select * from student where age between 19 and 20;
++------+--------+-------+-------+------+
+| roll | name   | class | marks | age  |
++------+--------+-------+-------+------+
+|    5 | Nitesh | TY    | 87.67 |   20 |
+|   21 | Ankita | SY    | 67.67 |   19 |
++------+--------+-------+-------+------+
+
+MariaDB [college]> select * from student where age in (18,20);
++------+--------+-------+--------+------+
+| roll | name   | class | marks  | age  |
++------+--------+-------+--------+------+
+|    5 | Nitesh | TY    |  87.67 |   20 |
+|    1 | Arnav  | FY    | 687.67 |   18 |
++------+--------+-------+--------+------+
+2 rows in set (0.000 sec)
+
+MariaDB [college]> select * from student where age not in (18,20);
++------+--------+-------+-------+------+
+| roll | name   | class | marks | age  |
++------+--------+-------+-------+------+
+|   21 | Ankita | SY    | 67.67 |   19 |
++------+--------+-------+-------+------+
+1 row in set (0.000 sec)
+
+MariaDB [college]> select * from student where age is null;
+Empty set (0.000 sec)
+
+MariaDB [college]> select * from student where age is not null;
++------+--------+-------+--------+------+
+| roll | name   | class | marks  | age  |
++------+--------+-------+--------+------+
+|    5 | Nitesh | TY    |  87.67 |   20 |
+|    1 | Arnav  | FY    | 687.67 |   18 |
+|   21 | Ankita | SY    |  67.67 |   19 |
++------+--------+-------+--------+------+
+3 rows in set (0.000 sec)
+
+MariaDB [college]> create table employee(Employee_id int , First_name varchar(20), Last_name varchar(20) , Salary float, Joining_date date, Departement varchar(20) );
+Query OK, 0 rows affected (0.217 sec)
+
+MariaDB [college]> insert into employee values(1, 'Bob', 'Kinto', 1000000, '2019-01-20', 'Finance');
+Query OK, 1 row affected (0.048 sec)
+
+MariaDB [college]> insert into employee values(2, 'Jerry', 'Kansxo',  6000000 , '2019-01-15',  'IT');
+Query OK, 1 row affected (0.038 sec)
+
+MariaDB [college]> insert into employee values(3 , 'Philip' , 'Jose' , 8900000 , '2019-02-05' , 'Banking');
+Query OK, 1 row affected (0.034 sec)
+
+MariaDB [college]> insert into employee values(4 , 'John' , 'Abraham' , 2000000 , '2019-02-25' , 'Insurance' );
+Query OK, 1 row affected (0.038 sec)
+
+MariaDB [college]> insert into employee values(5 , 'Michael' , 'Mathew' , 2200000 , '2019-02-28' , 'Finance');
+Query OK, 1 row affected (0.042 sec)
+
+MariaDB [college]> insert into employee values(6 , 'Alex' , 'chreketo' , 4000000 , '2019-05-10' , 'IT' );
+Query OK, 1 row affected (0.037 sec)
+
+MariaDB [college]> insert into employee values(7 , 'Yohan' , 'Soso' , 1230000 , '2019-06-20' , 'Banking'  );
+Query OK, 1 row affected (0.037 sec)
+
+MariaDB [college]> select * from employee;
++-------------+------------+-----------+---------+--------------+-------------+
+| Employee_id | First_name | Last_name | Salary  | Joining_date | Departement |
++-------------+------------+-----------+---------+--------------+-------------+
+|           1 | Bob        | Kinto     | 1000000 | 2019-01-20   | Finance     |
+|           2 | Jerry      | Kansxo    | 6000000 | 2019-01-15   | IT          |
+|           3 | Philip     | Jose      | 8900000 | 2019-02-05   | Banking     |
+|           4 | John       | Abraham   | 2000000 | 2019-02-25   | Insurance   |
+|           5 | Michael    | Mathew    | 2200000 | 2019-02-28   | Finance     |
+|           6 | Alex       | chreketo  | 4000000 | 2019-05-10   | IT          |
+|           7 | Yohan      | Soso      | 1230000 | 2019-06-20   | Banking     |
++-------------+------------+-----------+---------+--------------+-------------+
+
+
+MariaDB [college]> select First_name , Last_name from employee;
++------------+-----------+
+| First_name | Last_name |
++------------+-----------+
+| Bob        | Kinto     |
+| Jerry      | Kansxo    |
+| Philip     | Jose      |
+| John       | Abraham   |
+| Michael    | Mathew    |
+| Alex       | chreketo  |
+| Yohan      | Soso      |
++------------+-----------+
+7 rows in set (0.000 sec)
+
+MariaDB [college]> select count(Employee_id) from employee where  Departement ='IT';
++--------------------+
+| count(Employee_id) |
++--------------------+
+|                  2 |
++--------------------+
+1 row in set (0.000 sec)
+
+MariaDB [college]> select * from employee where Joining_date > '2019-02-01';
++-------------+------------+-----------+---------+--------------+-------------+
+| Employee_id | First_name | Last_name | Salary  | Joining_date | Departement |
++-------------+------------+-----------+---------+--------------+-------------+
+|           3 | Philip     | Jose      | 8900000 | 2019-02-05   | Banking     |
+|           4 | John       | Abraham   | 2000000 | 2019-02-25   | Insurance   |
+|           5 | Michael    | Mathew    | 2200000 | 2019-02-28   | Finance     |
+|           6 | Alex       | chreketo  | 4000000 | 2019-05-10   | IT          |
+|           7 | Yohan      | Soso      | 1230000 | 2019-06-20   | Banking     |
++-------------+------------+-----------+---------+--------------+-------------+
+5 rows in set (0.000 sec)
+
+MariaDB [college]> select avg(Salary) from employee where  Departement ='Finance';
++-------------+
+| avg(Salary) |
++-------------+
+|     1600000 |
++-------------+
+1 row in set (0.000 sec)
+
+MariaDB [college]> select max(Salary) from employee where  Departement ='Banking';
++-------------+
+| max(Salary) |
++-------------+
+|     8900000 |
++-------------+
+1 row in set (0.000 sec)
+
+MariaDB [college]> select departement, sum(Salary) from employee group by  Departement ;
++-------------+-------------+
+| departement | sum(Salary) |
++-------------+-------------+
+| Banking     |    10130000 |
+| Finance     |     3200000 |
+| Insurance   |     2000000 |
+| IT          |    10000000 |
++-------------+-------------+
+4 rows in set (0.001 sec)
+
+MariaDB [college]> select  Employee_id ,First_name, max(Salary) from employee ;
++-------------+------------+-------------+
+| Employee_id | First_name | max(Salary) |
++-------------+------------+-------------+
+|           1 | Bob        |     8900000 |
++-------------+------------+-------------+
+
+MariaDB [college]> select * from employee where Salary >3000000 order by Joining_date ;
++-------------+------------+-----------+---------+--------------+-------------+
+| Employee_id | First_name | Last_name | Salary  | Joining_date | Departement |
++-------------+------------+-----------+---------+--------------+-------------+
+|           2 | Jerry      | Kansxo    | 6000000 | 2019-01-15   | IT          |
+|           3 | Philip     | Jose      | 8900000 | 2019-02-05   | Banking     |
+|           6 | Alex       | chreketo  | 4000000 | 2019-05-10   | IT          |
++-------------+------------+-----------+---------+--------------+-------------+
+
+MariaDB [college]> select * from employee where Last_name like 'K%';
++-------------+------------+-----------+---------+--------------+-------------+
+| Employee_id | First_name | Last_name | Salary  | Joining_date | Departement |
++-------------+------------+-----------+---------+--------------+-------------+
+|           1 | Bob        | Kinto     | 1000000 | 2019-01-20   | Finance     |
+|           2 | Jerry      | Kansxo    | 6000000 | 2019-01-15   | IT          |
++-------------+------------+-----------+---------+--------------+-------------+
+
+MariaDB [college]> select max(salary) from employee  where salary < (select  max(salary) from employee);
++-------------+
+| max(salary) |
++-------------+
+|     6000000 |
++-------------+
+1 row in set (0.001 sec)
+
+MariaDB [college]> select * from employee where salary > (select avg(salary)from employee);
++-------------+------------+-----------+---------+--------------+-------------+
+| Employee_id | First_name | Last_name | Salary  | Joining_date | Departement |
++-------------+------------+-----------+---------+--------------+-------------+
+|           2 | Jerry      | Kansxo    | 6000000 | 2019-01-15   | IT          |
+|           3 | Philip     | Jose      | 8900000 | 2019-02-05   | Banking     |
+|           6 | Alex       | chreketo  | 4000000 | 2019-05-10   | IT          |
++-------------+------------+-----------+---------+--------------+-------------+
+
+MariaDB [college]> select * from employee where  departement ='Insurance';
++-------------+------------+-----------+---------+--------------+-------------+
+| Employee_id | First_name | Last_name | Salary  | Joining_date | Departement |
++-------------+------------+-----------+---------+--------------+-------------+
+|           4 | John       | Abraham   | 2000000 | 2019-02-25   | Insurance   |
++-------------+------------+-----------+---------+--------------+-------------+
+1 row in set (0.000 sec)
+
+MariaDB [college]> update employee set salary = (salary + salary * 10 /100) where departement ='Insurance';
+Query OK, 1 row affected (0.065 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [college]> select * from employee where  departement ='Insurance';
++-------------+------------+-----------+---------+--------------+-------------+
+| Employee_id | First_name | Last_name | Salary  | Joining_date | Departement |
++-------------+------------+-----------+---------+--------------+-------------+
+|           4 | John       | Abraham   | 2200000 | 2019-02-25   | Insurance   |
++-------------+------------+-----------+---------+--------------+-------------+
+1 row in set (0.000 sec)
+
+
+MariaDB [college]> delete from employee where Joining_date > '2019-02-01';
+Query OK, 5 rows affected (0.036 sec)

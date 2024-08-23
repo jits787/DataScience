@@ -1,0 +1,122 @@
+# Celcius to Fahrenheit
+
+C = readline(prompt = "Enter an Temperature i Celcius: ") 
+F = as.numeric(C) *9/5 + 32
+print(F)
+
+# Find the area and perimeter
+
+Radius = readline(prompt = "Enter radius: ") 
+R = as.numeric(Radius)
+Area = 3.14 * R * R
+Perimeter= 2 * 3.14 * R
+print(Area)
+print(Perimeter)
+
+
+# Amount with interest
+
+Amount = readline(prompt = "Enter Amount: ") 
+Interest = readline(prompt = "Enter interest: ") 
+
+A = as.numeric(Amount)
+I = as.numeric(Interest)
+FA = A + A*I/100
+
+print(FA)
+
+# Meter centimeters, inches, and yards
+
+Distance = readline(prompt = "Enter Distance in meters: ") 
+
+M = as.numeric(Distance)
+
+CM = M * 100
+Inch = M * 39.3701
+Yards = M * 1.0936
+
+cat ("Centimeter:", CM, "\n")
+cat("Inch:", Inch , "\n")
+cat("Yards:",Yards , "\n")
+
+
+# Profit or Loss
+
+SellCost = readline(prompt = "Enter selling cost: ") 
+BuyCost = readline(prompt = "Enter Actual cost: ") 
+
+SC = as.numeric(SellCost)
+BC = as.numeric(BuyCost)
+
+if (SC > BC) {
+    cat("Profit", SC - BC)
+} else  {
+  cat("Loss", BC - SC)
+}
+
+
+# Salary Calculation
+
+Basic = readline(prompt = "Enter Basic Salary: ") 
+
+BS = as.numeric(Basic)
+
+DA = BS * 75 / 100
+HRA =BS * 20 / 100
+
+if (BS<10000){
+  GS =DA + BS
+}else if (BS>=10000 & BS<20000){
+  GS =DA + BS + HRA*50/100
+}else {
+  GS =DA + BS + HRA
+}
+cat ("Gross Salary:", GS)
+
+
+# Factorial of the number
+
+number = readline(prompt = "Enter a number: ") 
+
+n = as.integer(number)
+
+
+if(n==1 | n==0) {
+  factorial = 1 
+}else {
+  for(i in 1:n) {
+    factorial = factorial * i
+}
+  
+} 
+cat ("Factorial:", factorial)
+
+
+# addition of all numbers between  range
+
+num1 = readline(prompt = "Enter first number: ") 
+num2 = readline(prompt = "Enter last number: ") 
+n1 = as.numeric(num1)
+n2 = as.numeric(num2)
+addition=0
+for(i in n1:n2) {
+    addition = addition + i
+}
+cat ("Adition:", addition)
+
+
+# Function even / Odd
+odd_even <- function(num)
+{
+  if (num %% 2 == 0){
+    return('even')
+}else {
+  return('odd')
+}
+}
+# calling odd_even function
+num1 = readline(prompt = "Enter  number: ") 
+
+#printing result
+cat("Number is", odd_even(as.integer(num1)))
+
